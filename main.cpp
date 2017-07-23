@@ -34,6 +34,7 @@ char board[3][3] =
 };
 
 void ShowStatus(){
+    glLineWidth(30);
     glColor3ub(0x54,0x54,0x54);
     if(WinState == '\\' )
     {
@@ -269,7 +270,7 @@ int evaluate(char b[3][3])
     return 0;
 }
 
-// This is the minimax function. 
+// This is the minimax function.
 //It considers all the possible ways the game can go and returns value of the board
 int minimax(char board[3][3], int depth, bool isMax)
 {
