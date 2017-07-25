@@ -103,6 +103,11 @@ void myinit()
 	glutPostRedisplay();
 }
 
+void reshape(int w,int h)
+{
+    glutReshapeWindow(500,500);
+}
+
 bool mouseBtnTest(int btn,int state){
     if(btn==GLUT_LEFT_BUTTON && state==GLUT_DOWN && evaluate(board)==0)
         return true;
@@ -140,6 +145,18 @@ void mouse(int btn,int state,int ox,int oy)
         board[2][2]=opponent;gamePlay();
     }
     glutPostRedisplay();
+}
+
+void keyboard(unsigned char key,int x, int y)
+{
+	if (key == 27 || key=='q'|| key=='Q') // escape key
+        exit(0);
+    else if(key=='R' || key=='r'){
+    	for(int i=0;i<3;i++)
+            for(int j=0;j<3;j++)
+                board[i][j]='_';
+        glutPostRedisplay();
+    }
 }
 
 void drawX(int i,int j){
@@ -378,11 +395,13 @@ int main(int argc, char **argv)
 	glutInit(&argc,argv);
 	glutInitDisplayMode(GLUT_SINGLE|GLUT_RGB);
 	glutInitWindowSize(500,500);
-	glutInitWindowPosition(0,0);
+	glutInitWindowPosition(100,100);
 	glutCreateWindow("TicTacToe");
 
 	myinit();
 	glutMouseFunc(mouse);
+	glutKeyboardFunc(keyboard);
 	glutDisplayFunc(display);
+	glutReshapeFunc(reshape);
 	glutMainLoop();
 }
