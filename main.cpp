@@ -1,12 +1,12 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include <iostream>
-#include <GL/freeglut.h>
+#include <GL/glut.h>
 #include <math.h>
 #define maxx 4
 #define maxy 4
-#define dx 100
-#define dy 100
+#define dx 101
+#define dy 101
 
 using namespace std;
 
@@ -21,10 +21,10 @@ int evaluate(char b[3][3]);
 Move findBestMove(char board[3][3]);
 
 GLfloat x[maxx]={0.0};
-GLfloat x0=100,y0=100;
+GLfloat x0=100;//, y0=100;
 GLint i,j;
-char player = 'x', opponent = 'o';
-char WinState='X';
+char player = 'o', opponent = 'x';
+char WinState='O';
 int WinStateCol=999,WinStateRow=999;
 char board[3][3] =
 {
@@ -75,15 +75,15 @@ void gamePlay()
         cout<<"ROW: "<<bestMove.row<<endl<<"COL: "<<bestMove.col<<endl;
         board[bestMove.row][bestMove.col]=player;
         if(evaluate(board)>0){
-            cout<<"player wins!\n";
+            cout<<"opponent wins!\n";
         }
     }
     else{
         if(evaluate(board)<0){
-            cout<<"opponent wins!\n";
+            cout<<"player wins!\n";
         }
         else if(evaluate(board)>0){
-            cout<<"player wins!\n";
+            cout<<"opponent wins!\n";
         }
         else if(evaluate(board)==0){
             cout<<"draw!\n";
@@ -206,10 +206,10 @@ void display()
     for(int i=0;i<3;i++){
         for(int j=0;j<3;j++){
             if(board[i][j]==opponent){
-                drawO(i,j);
+                drawX(i,j);
             }
             else if(board[i][j]==player){
-                drawX(i,j);
+                drawO(i,j);
             }
         }
     }
